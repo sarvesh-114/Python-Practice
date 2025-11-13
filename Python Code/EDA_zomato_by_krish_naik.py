@@ -45,7 +45,8 @@ plt.pie(values[:3], labels = country_names[:3])
 plt.pie(values[:3], labels = country_names[:3], autopct = '%1.3f%%')
 
 final_data.groupby(['Aggregate rating', 'Rating color', 'Rating text']).size()
-ratings_data = final_data.groupby(['Aggregate rating', 'Rating color', 'Rating text']).size().reset_index().rename(columns = {0: 'Rating Count'})
+ratings_data = final_data.groupby(['Aggregate rating', 'Rating color', 'Rating text'])
+.size().reset_index().rename(columns = {0: 'Rating Count'})
 
 plt.figure(figsize = (8, 5))
 sns.barplot(x = 'Aggregate rating', y= 'Rating Count' , data = ratings_data)
@@ -62,4 +63,12 @@ plt.gca().set_facecolor('#63666A')
 plt.ylabel("Rating Counts")
 plt.xlabel("Ratings")
 plt.show()
+
+final_data[final_data['Rating color'] == 'White'].groupby('Country').size(
+).reset_index().rename(columns = {0 : 'Rating Count'})
+
+final_data[['Has Online delivery', 'Country']].groupby(['Has Online delivery', 'Country']).size(
+).reset_index()
+
+
 
